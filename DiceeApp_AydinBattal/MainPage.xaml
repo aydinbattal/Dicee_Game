@@ -8,7 +8,20 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-
+    <Grid Background="#FF32E7F4">
+        <StackPanel VerticalAlignment="Center">
+            <TextBlock Text="DICEE GAME" HorizontalAlignment="Center" FontSize="40" Foreground="White" />
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <Border Margin="20" Height="150" Width="150" CornerRadius="15" Background="White"><TextBlock x:Name="Dice1" TextAlignment="Center" VerticalAlignment="Center" /></Border>
+                <Border Margin="20" Height="150" Width="150" CornerRadius="15" Background="White"><TextBlock x:Name="Dice2" TextAlignment="Center" VerticalAlignment="Center" /></Border>
+            </StackPanel>
+            <Button x:Name="RollButton" Content="Roll" FontSize="30" Foreground="White" HorizontalAlignment="Center" Margin="20" Click="ButtonBase_OnClick"/>
+            <TextBlock x:Name="TurnScore" Text="Turn Score:" HorizontalAlignment="Center" FontSize="30"/>
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <TextBlock x:Name="Player1Score" Text="Player 1 Score:" Margin="20"/>
+                <TextBlock x:Name="Player2Score" Text="Player 2 Score:" Margin="20"/>
+            </StackPanel>
+            
+        </StackPanel>
     </Grid>
 </Page>
