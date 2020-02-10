@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -30,6 +31,24 @@ namespace DiceeApp_AydinBattal
 
         private async void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
+            if (_game.IsGameOver())
+            {
+                MessageDialog message = new MessageDialog("The game is over!");
+                message.ShowAsync();
+                _game.Player1TurnScore = 0;
+                _game.Player2TurnScore = 0;
+                _game.player1Points = 0;
+                _game.player2Points = 0;
+                Dice1.Text = $"1";
+                Dice2.Text = $"1";
+                TurnScore.Text = $"Turn Score: 0";
+                Player1Score.Text = $"Player 1 Score: 0";
+                Player2Score.Text = $"Player 2 Score: 0";
+                RollButton.Content = $"Roll (Player1)";
+                _game = new Game();
+                return;
+            }
+
             List<int> numbers = _game.Roll();
             Random random = new Random();
             Dice1.Text = numbers[0].ToString();
@@ -38,22 +57,35 @@ namespace DiceeApp_AydinBattal
             //Dice1.Text = random.Next(1, 7).ToString();
             //Dice2.Text = random.Next(1, 7).ToString();
 
-            TurnScore.Text = $"Joe: {_game.turnScore}";
-
-            if (_game.IsPlayer1 == true)
+            if (_game.IsPlayer1 == false)
             {
-                _game.player1Points = (_game.player1Points + _game.turnScore);
+                TurnScore.Text = $"Turn Score: {_game.Player1TurnScore}";
+
+                _game.player1Points = (_game.player1Points + _game.Player1TurnScore);
+                if (_game.Player1TurnScore == 200)
+                    TurnScore.Text = $"Double Jackpot! Turn Score: {_game.Player1TurnScore}";
+
                 RollButton.Content = $"Roll (Player 1)"; 
                 Player1Score.Text = $"Player 1 Score: {_game.player1Points}";
-                _game.IsPlayer1 = false;
+                _game.IsPlayer1 = true;
             }
             else
             {
-                _game.player2Points = (_game.player2Points + _game.turnScore);
+                TurnScore.Text = $"Turn Score: {_game.Player2TurnScore}";
+
+                _game.player2Points = (_game.player2Points + _game.Player2TurnScore);
+                if (_game.Player2TurnScore == 200)
+                    TurnScore.Text = $"Double Jackpot! Turn Score: {_game.Player2TurnScore}";
+                //else
+                //    TurnScore.Text = $"Turn Score: {_game.Player2TurnScore}";
+
                 RollButton.Content = $"Roll (Player 2)";
                 Player2Score.Text = $"Player 2 Score: {_game.player2Points}";
-                _game.IsPlayer1 = true;
+                _game.IsPlayer1 = false;
             }
+
+
+            
         }
     }
 }

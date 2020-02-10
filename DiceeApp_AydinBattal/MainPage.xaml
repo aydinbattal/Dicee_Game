@@ -12,8 +12,8 @@
         <StackPanel VerticalAlignment="Center">
             <TextBlock Text="DICEE GAME" HorizontalAlignment="Center" FontSize="40" Foreground="White" Margin="40" />
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                <Border Margin="20" Height="150" Width="150" CornerRadius="15" Background="White"><TextBlock x:Name="Dice1" Text="0" Foreground="Black" FontSize="50" TextAlignment="Center" VerticalAlignment="Center" /></Border>
-                <Border Margin="20" Height="150" Width="150" CornerRadius="15" Background="White"><TextBlock x:Name="Dice2" Text="0" Foreground="Black" FontSize="50" TextAlignment="Center" VerticalAlignment="Center" /></Border>
+                <Border Margin="20" Height="150" Width="150" CornerRadius="15" Background="White"><TextBlock x:Name="Dice1" Text="1" Foreground="Black" FontSize="50" TextAlignment="Center" VerticalAlignment="Center" /></Border>
+                <Border Margin="20" Height="150" Width="150" CornerRadius="15" Background="White"><TextBlock x:Name="Dice2" Text="1" Foreground="Black" FontSize="50" TextAlignment="Center" VerticalAlignment="Center" /></Border>
             </StackPanel>
             <Button x:Name="RollButton" Content="Roll (Player1)" FontSize="30" Foreground="White" HorizontalAlignment="Center" Margin="20" Click="ButtonBase_OnClick"/>
             <TextBlock x:Name="TurnScore" Text="Turn Score: 0" HorizontalAlignment="Center" FontSize="30"/>

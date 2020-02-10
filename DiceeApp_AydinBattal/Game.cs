@@ -8,12 +8,31 @@ namespace DiceeApp_AydinBattal
 {
     class Game
     {
-        public int turnScore;
+        public int Player1TurnScore;
+        public int Player2TurnScore;
         public int player1Points;
         public int player2Points;
         public bool IsPlayer1;
+        public int Rounds;
+
+        public Game()
+        {
+            Rounds = 1;
+        }
+
+        public bool IsGameOver()
+        {
+            return Rounds == 10 || Player1TurnScore == 300 || Player2TurnScore == 300;
+            
+
+        }
+
+
         public List<int> Roll()
         {
+            Rounds = Rounds + 1;
+
+
             Random randomNumberGenerator = new Random();
             List<int> numbers = new List<int>();
 
@@ -24,6 +43,10 @@ namespace DiceeApp_AydinBattal
 
             }
 
+            
+                    
+
+
             CalculateTurn(numbers);
             return numbers;
             
@@ -31,31 +54,67 @@ namespace DiceeApp_AydinBattal
 
         private void CalculateTurn(List<int> numbers)
         {
-            if (numbers[0] == numbers[1])
+            if (IsPlayer1 == false)
             {
-                if (numbers[0] == 6 && numbers[1] == 6)
+                if (numbers[0] == numbers[1])
                 {
-                    turnScore = 100;
+                    if (numbers[0] == 6 && numbers[1] == 6)
+                    {
+                        Player1TurnScore = Player1TurnScore + 100;
+
+                    }
+                    else
+                    {
+                        Player1TurnScore = numbers[0] * 10;
+                    }
                 }
                 else
                 {
-                    turnScore = numbers[0] * 10;
+                    Player1TurnScore = 0;
                 }
+
             }
             else
             {
-                turnScore = 0;
+                if (numbers[0] == numbers[1])
+                {
+                    if (numbers[0] == 6 && numbers[1] == 6)
+                    {
+                        Player2TurnScore = Player2TurnScore + 100;
+
+                    }
+                    else
+                    {
+                        Player2TurnScore = numbers[0] * 10;
+                    }
+                }
+                else
+                {
+                    Player2TurnScore = 0;
+                }
             }
             
-            
+
+
         }
 
-        public void PlayerTurn()
-        {
-            IsPlayer1 = true;
-            Roll();
-            IsPlayer1 = false;
-            Roll();
-        }
+
+        //public List<int> Jackpot()
+        //{
+        //    List<int> jackpots = new List<int>();
+        //    jackpots.Add(1);
+        //    CalculateJackpot(jackpots);
+        //    return jackpots;
+        //}
+
+        //private void CalculateJackpot(List<int> jackpots)
+        //{
+        //    for (int i = 0; i >= jackpots.Count; i++)
+        //    {
+        //        TurnScore = TurnScore + 100;
+        //    }
+
+        //}
+
     }
 }
