@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Popups;
 
 namespace DiceeApp_AydinBattal
 {
@@ -10,8 +11,8 @@ namespace DiceeApp_AydinBattal
     {
         public int Player1TurnScore;
         public int Player2TurnScore;
-        public int player1Points;
-        public int player2Points;
+        public int Player1Points;
+        public int Player2Points;
         public bool IsPlayer1;
         public int Rounds;
 
@@ -54,7 +55,7 @@ namespace DiceeApp_AydinBattal
 
         private void CalculateTurn(List<int> numbers)
         {
-            if (IsPlayer1 == false)
+            if /*(Rounds % 2 == 0)*/ (IsPlayer1 == false)
             {
                 if (numbers[0] == numbers[1])
                 {
@@ -96,6 +97,28 @@ namespace DiceeApp_AydinBattal
             
 
 
+        }
+
+        public void EndGame()
+        {
+            if (Player1Points > Player2Points)
+            {
+                MessageDialog message = new MessageDialog($"The game is over!\nPlayer 1 won with a score of {Player1Points}");
+                message.ShowAsync();
+            }
+                
+            else if (Player2Points > Player1Points)
+            {
+                MessageDialog message = new MessageDialog($"The game is over!\nPlayer 2 won with a score of {Player2Points}");
+                message.ShowAsync();
+            }
+                
+            else
+            {
+                MessageDialog message = new MessageDialog($"The game is over!\nIt's a draw!");
+                message.ShowAsync();
+            }
+                
         }
 
 

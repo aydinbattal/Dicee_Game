@@ -33,12 +33,11 @@ namespace DiceeApp_AydinBattal
         {
             if (_game.IsGameOver())
             {
-                MessageDialog message = new MessageDialog("The game is over!");
-                message.ShowAsync();
+                _game.EndGame();
                 _game.Player1TurnScore = 0;
                 _game.Player2TurnScore = 0;
-                _game.player1Points = 0;
-                _game.player2Points = 0;
+                _game.Player1Points = 0;
+                _game.Player2Points = 0;
                 Dice1.Text = $"1";
                 Dice2.Text = $"1";
                 TurnScore.Text = $"Turn Score: 0";
@@ -57,30 +56,32 @@ namespace DiceeApp_AydinBattal
             //Dice1.Text = random.Next(1, 7).ToString();
             //Dice2.Text = random.Next(1, 7).ToString();
 
-            if (_game.IsPlayer1 == false)
+            if /*(_game.Rounds % 2 == 0)*/  (_game.IsPlayer1 == false) 
             {
                 TurnScore.Text = $"Turn Score: {_game.Player1TurnScore}";
 
-                _game.player1Points = (_game.player1Points + _game.Player1TurnScore);
+                _game.Player1Points = (_game.Player1Points + _game.Player1TurnScore);
                 if (_game.Player1TurnScore == 200)
                     TurnScore.Text = $"Double Jackpot! Turn Score: {_game.Player1TurnScore}";
 
-                RollButton.Content = $"Roll (Player 1)"; 
-                Player1Score.Text = $"Player 1 Score: {_game.player1Points}";
+                
+                Player1Score.Text = $"Player 1 Score: {_game.Player1Points}";
+                RollButton.Content = $"Roll (Player 2)";
                 _game.IsPlayer1 = true;
             }
             else
             {
                 TurnScore.Text = $"Turn Score: {_game.Player2TurnScore}";
 
-                _game.player2Points = (_game.player2Points + _game.Player2TurnScore);
+                _game.Player2Points = (_game.Player2Points + _game.Player2TurnScore);
                 if (_game.Player2TurnScore == 200)
                     TurnScore.Text = $"Double Jackpot! Turn Score: {_game.Player2TurnScore}";
                 //else
                 //    TurnScore.Text = $"Turn Score: {_game.Player2TurnScore}";
 
-                RollButton.Content = $"Roll (Player 2)";
-                Player2Score.Text = $"Player 2 Score: {_game.player2Points}";
+                Player2Score.Text = $"Player 2 Score: {_game.Player2Points}";
+
+                RollButton.Content = $"Roll (Player 1)";
                 _game.IsPlayer1 = false;
             }
 
